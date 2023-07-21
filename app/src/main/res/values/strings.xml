@@ -4,4 +4,13 @@
     <string name="amount">Amount</string>
     <string name="from">From</string>
     <string name="to">To</string>
+    <string-array name="currencies">
+        <item>EUR</item>
+        <item>USD</item>
+        <item>GBP</item>
+        <item>JPY</item>
+        <item>AUD</item>
+        <item>HKD</item>
+    </string-array>
+
 </resources>
