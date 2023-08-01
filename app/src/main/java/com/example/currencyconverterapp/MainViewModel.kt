@@ -11,30 +11,48 @@ import kotlinx.coroutines.launch
 import kotlin.math.round
 
 class MainViewModel : ViewModel() {
-    //private val repository = CurrencyRepository()
+    private val repository = CurrencyRepository()
 
-    private val _myCurrency = MutableLiveData<Double>()
-    val myCurrency: LiveData<Double>
+    private val _myCurrency = MutableLiveData<Currency>()
+    val myCurrency: LiveData<Currency>
         get() = _myCurrency
 
-   /* fun getRates() {
+    private val _myCurrencyList = MutableLiveData<List<String>>()
+    val myCurrencyList: LiveData<List<String>>
+        get() = _myCurrencyList
+
+   /*fun getRates() {
         CoroutineScope(Dispatchers.IO).launch {
             _myCurrency.value = repository.getRates()
         }
     }*/
-    fun convert(source: Double,amount: String, toCurrency: Double){
-       Log.e("tagz", "ok $amount")
-      if (amount.isEmpty()) {
+    fun getCurrencies(){
+        val rates =  repository.getCurrencyRates().keys
+       _myCurrencyList.value = rates.toList()
+    }
+
+    fun convert(amount: String, fromCurrency: String, toCurrency: String) {
+        if (amount.isEmpty()) {
+            return
+        } else if(repository.getCurrencyRates().keys.contains("USD$fromCurrency")){
+            val input = amount.toDouble()
+            val toResult = "USD$toCurrency".toDouble()
+            val fromInput = "USD$fromCurrency".toDouble()
+            val initialConversion = round(input * fromInput)
+            val finalConversion = round(initialConversion * toResult)
+
+
+        }
+
+      /*if (amount.isEmpty()) {
           return
       } else {
-       val base = source
-       val to = toCurrency
-       val input = amount.toDouble()
-       Log.e("tagz", "mhg")
-        val baseConverter = round((base * input)/to)
-       Log.e("tagz", "klm $baseConverter")
-        _myCurrency.value = baseConverter
-       Log.e("tagz", "plo")
-      }
-    }
+          val input = amount.toDouble()
+          val toResult = toCurrency
+
+        //  val baseConverter = round((base * input)/to)
+       // _myCurrency.value = baseConverter*/
+
+
+}
 }

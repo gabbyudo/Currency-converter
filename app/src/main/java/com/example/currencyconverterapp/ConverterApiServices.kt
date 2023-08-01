@@ -1,4 +1,3 @@
-/*
 package com.example.currencyconverterapp
 
 import com.example.currencyconverterapp.model.Currency
@@ -37,10 +36,10 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface CurrencyApiService {
-    @GET("")
+    @GET("live")
     suspend fun getRates(): Currency
 }
 object CurrencyApi {
     val retrofitService : CurrencyApiService =
         retrofit.create(CurrencyApiService::class.java)
-}*/
+}
