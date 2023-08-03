@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.core.view.isEmpty
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.currencyconverterapp.databinding.ActivityMainBinding
@@ -21,12 +22,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         binding.convertButton.setOnClickListener{
-                if (binding.spinnerFrom == null){
+            Log.e("tagz", "good")
             viewModel.convert(
                 binding.inputField.text.toString(),
                 binding.spinnerFrom.selectedItem.toString(),
                 binding.spinnerTo.selectedItem.toString()
-            )}
+            )
+            Log.e("tagz", "kjnk")
         }
         viewModel.myCurrencyList.observe(this, Observer {
             val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, it)
@@ -50,9 +52,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                 }
-
             }
-
         })
         viewModel.getCurrencies()
 
@@ -74,18 +74,16 @@ class MainActivity : AppCompatActivity() {
                     id: Long
 
                 ) {
-                     binding.to.text = it[position]
+                    // binding.to.text = it[position]
                 }
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                 }
-
             }
-
         })
         viewModel.getCurrencies()
 
-        viewModel.myCurrencyList.observe(this, Observer {
-            //binding.showResult.text = it.toString()
+        viewModel.showResult.observe(this, Observer {
+            binding.showResult.text = it.toString()
 
         })
        /* viewModel.convert( binding.inputField.text.toString(), fromCurrency = "",

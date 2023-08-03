@@ -14,7 +14,9 @@ class CurrencyRepository {
             "USDAFN" to 57.8936,
             "USDALL" to 126.1652,
             "USDAMD" to 475.306,
-            "USDANG" to 1.78952
+            "USDANG" to 1.78952,
+            "USDNGN" to 750.000,
+            "USDGBP" to 1.2100
         )
         return rates
     }
