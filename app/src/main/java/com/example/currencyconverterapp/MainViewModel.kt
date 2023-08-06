@@ -1,9 +1,13 @@
 package com.example.currencyconverterapp
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.currencyconverterapp.model.Currency
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlin.math.round
 
 class MainViewModel : ViewModel() {
@@ -21,9 +25,10 @@ class MainViewModel : ViewModel() {
     val showResult: LiveData<Double>
         get() = _showResult
 
-   /*fun getRates() {
-        CoroutineScope(Dispatchers.IO).launch {
-            _myCurrency.value = repository.getRates()
+    /*fun getRates() {
+        CoroutineScope(Dispatchers.Main).launch {
+            val rates = repository.getRates()
+            _myCurrency.value = rates
         }
     }*/
     fun getCurrencies(){
@@ -47,15 +52,6 @@ class MainViewModel : ViewModel() {
             val finalConversion = round(initialConversion * toResult!!)
             _showResult.value = finalConversion
         }
-
-      /*if (amount.isEmpty()) {
-          return
-      } else {
-          val input = amount.toDouble()
-          val toResult = toCurrency
-
-        //  val baseConverter = round((base * input)/to)
-       // _myCurrency.value = baseConverter*/
 
 
 }

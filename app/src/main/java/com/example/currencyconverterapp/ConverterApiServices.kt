@@ -11,13 +11,13 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
 
+//https://api.currencylayer.com/
 
-private const val BASE_URL = "https://api.currencylayer.com/"
+private const val BASE_URL = "http://api.currencylayer.com/"
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
     .build()
-
 
 val interceptor : HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
     level = HttpLoggingInterceptor.Level.BODY
@@ -31,12 +31,12 @@ val client : OkHttpClient = OkHttpClient.Builder().apply {
 private val retrofit = Retrofit.Builder()
     .addConverterFactory(MoshiConverterFactory.create(moshi))
     .addCallAdapterFactory(CoroutineCallAdapterFactory())
-    .baseUrl(BASE_URL)
+    //.baseUrl(BASE_URL)
     .client(client)
     .build()
 
 interface CurrencyApiService {
-    @GET("live")
+   // @GET("live")
     suspend fun getRates(): Currency
 }
 object CurrencyApi {

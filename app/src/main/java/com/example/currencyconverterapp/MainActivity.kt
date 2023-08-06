@@ -22,13 +22,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         binding.convertButton.setOnClickListener{
-            Log.e("tagz", "good")
             viewModel.convert(
                 binding.inputField.text.toString(),
                 binding.spinnerFrom.selectedItem.toString(),
                 binding.spinnerTo.selectedItem.toString()
             )
-            Log.e("tagz", "kjnk")
         }
         viewModel.myCurrencyList.observe(this, Observer {
             val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, it)
